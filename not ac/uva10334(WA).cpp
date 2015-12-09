@@ -18,6 +18,12 @@ public:
 		for (i = maxlen - 1; i&&this->d[i] == b.d[i]; i--);
 		return this->d[i] < b.d[i];
 	}
+	Bigint operator =(Bigint b){
+		for (int i = 0; i < maxlen; i++){
+			d[i] = b.d[i];
+		}
+		return *this;
+	}
 	Bigint operator +(Bigint b){
 		Bigint sum;
 		int c = 0;
