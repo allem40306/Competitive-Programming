@@ -80,12 +80,12 @@ int main() {
 		int tp = 0;
 		while (two[tp] < n)tp++;
 		//memset(heapp, 0, sizeof(heapp));
-		bulit(1, two[tp++], 1);
+		bulit(1, n, 1);
 		char ch;
 		while (cin >> ch, ch != 'E') {
 			scanf("%d %d", &a, &b);
 			if (ch == 'S') {
-				modify(1, two[tp++], 1);
+				modify(1, n, 1);
 			}
 			else if (ch == 'M') {
 				ans = 0;
