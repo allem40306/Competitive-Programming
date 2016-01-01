@@ -1,18 +1,30 @@
-//uva00494 Kindergarten Counting Game
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <cctype>
+/*******************************************************/
+/* UVa 494 Kindergarten Counting Game                  */
+/* Author: LanyiKnight [at] knightzone.org             */
+/* Version: 2011/11/29                                 */
+/*******************************************************/
+#include<iostream>
+#include<cstdio>
+#include<cctype>
+#include<string>
 using namespace std;
 
 int main(){
-	int nw, i;
-	string  s;
+	string s, temp;
+	int count;
+	bool alphap = 0;
 	while (getline(cin, s)){
-		nw = 1;
-		for (i = 1; i != s.size(); i++){
-			if (isalpha(s[i]) && !isalpha(s[i - 1]))nw++;
+		count = 0;
+		for (int i = 0; i < s.length(); i++){
+			if (isalpha(s[i]) && !alphap){
+				alphap = 1;
+				count++;
+			}
+			else if (!isalpha(s[i]) && alphap){
+				alphap = 0;
+			}
 		}
-		cout << nw << endl;
+		printf("%d\n", count);
 	}
+	return 0;
 }
