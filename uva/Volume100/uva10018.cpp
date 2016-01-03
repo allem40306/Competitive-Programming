@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-string n_to_s(int n){
+string n_to_s(unsigned n){
 	string s = "";
 	while (n){
 		s = char((n % 10) + 48) + s;
@@ -13,19 +13,19 @@ string n_to_s(int n){
 	return s;
 }
 
-int s_to_n(string s){
-	int n = 0, j = s.size();
+unsigned s_to_n(string s){
+	unsigned n = 0, j = s.size();
 	for (int i = 0; i < j; i++)
-		n = n * 10 + int(s[i] - '0');
+		n = n * 10 + unsigned(s[i] - '0');
 	return n;
 }
 
 int main() {
-	int n; 
+	unsigned n;
 	cin >> n;
 	while (n--){
 		string m;
-		int cc = 1;
+		unsigned cc = 1;
 		cin >> m;
 		string m1 = m;
 		reverse(m1.begin(), m1.end());
