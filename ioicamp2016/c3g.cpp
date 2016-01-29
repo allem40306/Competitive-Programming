@@ -1,29 +1,42 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 using namespace std;
-#define N 1005
-int dx[4]={0,-1,0,1},dy[4]={-1,0,1,0};
+#define N 10010
+#define M 1000000000
+#define init(i) memset(i,0,sizeof(i))
+#define minn(a,b) (a<b?a:b)
+int a[N];
 
-struct lo{
-	int x,y;
-	loc(int x,int y){x=0;y=0;}
-};
-lo j[N],f[N];
-int r,c;
-void ff(char ch,string *s){
-	int p=0;
-	for(int i=0;i<r;i++)
-		for(int j=0;j<c;j++)
-		 	if(s[i][j]==ch)j[p++]=loc(i,j);
-	return;
+unsigned p(int L,int R){
+	int i=1,j=L;
+	unsigned pp=0;
+	for(;i+j-1<=R;i++)
+		pp+=i*a[j+i-1];
+		//cout<<L<<' '<<R<<' '<<pp<<endl;
+	return pp;
+}
+
+unsigned dp(int L,int R ,int k){
+	if(k<=0||R-L<k+1)return p(L,R);
+	unsigned ans=M;
+	for(int i=L;i<R;i++){
+		for(int j=1;j<=k;j++){
+		ans=minn(ans,dp(L,i,k-j-1)+dp(i+1,R,j-1));
+		//cout<<"a"<<ans<<endl;
+		}
+	}	
+	return ans;
 }
 
 int main(){
-	int t,i=0;
-	for(cin>>t;i<t;t++){
-		cin>>r>>c;
-		string s[M];
-		for(int j=0;j<n;j++)vin>>s[j];
-		ff('i',&s); ff('j',&s);
+	int t,n,k;
+	while(cin>>t){
+		while(t--){
+			cin>>n>>k;
+			init(a);
+			for(int i=0;i<n;i++)cin>>a[i];
+			for(int kk=0;kk<k;kk++)cout<<dp(0,n-1,kk)<<" ";
+			cout<<endl;
+			}
 	}
 }
