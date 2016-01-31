@@ -12,7 +12,7 @@ void ooo(string a){
 
 int main() {
 	string s;
-	while(cin>>s){
+	while(getline(cin,s)){
 		stringstream ss(s);
 		string w;
 		int o=0;
