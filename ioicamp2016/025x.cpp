@@ -11,7 +11,7 @@ int main() {
 		int n,m[S],p;
 		cin>>n;
 		for(p=0;p<n;p++)cin>>m[p];
-		int lis[S] = { 1 };
+		int lis[S]={0};
 		int maxx = 1;
 		for (int i = 1;i <= p;i++) {
 			for (int j = 0;j < i;j++)
@@ -20,15 +20,15 @@ int main() {
 		}
 		int oo[S],mm=maxx;
 		p--;
-		
+		printf("%d\n",maxx+1);
 		for(int o=0;p>=0&&maxx>=0;p--){
 			if(lis[p]==maxx){
 				oo[maxx]=m[p];
 				maxx--;
 			}	
 		}
-		for(int o=1;o<=mm;o++){
-			if(o>1)printf(" ");
+		for(int o=0;o<=mm;o++){
+			if(o)printf(" ");
 			printf("%d",oo[o]);
 		}
 		cout<<endl;
