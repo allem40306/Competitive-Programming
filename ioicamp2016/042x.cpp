@@ -19,8 +19,8 @@ int main() {
 			scanf("%d %d %d %d",&n,&m,&a,&b);
 			for(int i=0;i<m;i++){
 				scanf("%d %d",&u,&v);
-				if(u>v)swap(u,v);
 				e[u].push_back(v);
+				e[v].push_back(u);
 			}
 			int c[M];
 			int d[M];
