@@ -2,21 +2,41 @@
 #include <algorithm>
 #include <cstring>
 using namespace std;
-#define S 100005
+#define S 1005
+
+void init(int a[]){
+	for (int i = 0; i < S; i++){
+		a[i] = 1;
+	}
+}
 
 int main() {
-	int n, m[S], t = 1;
-	while (cin >> n, n != -1) {
-		memset(m, 0, sizeof(m));
-		int p = 1;
-		m[0] = n;
-		while (cin >> n, n != -1)m[p++] = n;
-		int lis[S] = { 0 };
-		int maxx = 0;
-		for (int i = 1;i <= p;i++) {
-			for (int j = 0;j < i;j++)
-				if (m[i] <= m[j])lis[i] = max(lis[i], lis[j] + 1);
-			maxx = max(maxx, lis[i]);
+	int tc, t = 1;
+	cin >> tc;
+	while (tc--){
+		int n, m[S];
+		cin >> n;
+		for (int i = 0; i < n; i++)cin >> m[i];
+		int lis[S];
+		init(lis);
+		int maxx = 1;
+		for (int i = 0; i < n; i++) {
+			for (int j = j=i + 1; j < n; j++)
+				if (m[i] < m[j])lis[j] = max(lis[j], lis[i] + 1);
 		}
+		for (int i = 0; i < n; i++) maxx = max(maxx, lis[i]);
+		printf("%d\n", maxx);
+		int oo[S], mm = maxx;
+		for (int p=n-1; p >= 0; p--){
+			if (lis[p] == maxx){
+				oo[maxx] = m[p];
+				maxx--;
+			}
+		}
+		for (int o = 1; o <= mm; o++){
+			if (o>1)printf(" ");
+			printf("%d", oo[o]);
+		}
+		cout << endl;
 	}
 }
