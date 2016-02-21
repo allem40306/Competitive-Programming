@@ -4,10 +4,10 @@
 #include <cctype>
 using namespace std;
 #define chi(ch) int(ch-'A')
+#define mp make_pair
 
 struct matrix{
 	int row, col;
-	matrix(int a, int b) : row(a), col(b){}
 }chain[30];
 
 void init(){
@@ -24,25 +24,32 @@ void init(){
 int main(){
 	init();
 	string s;
+	pair<int, int> a, b;
 	cin >> ws;
-	while (getline(cin, s)){
+	while (cin >> s){
 		int ans = 0;
-		stack <matrix> st;
+		stack <pair<int, int>> st;
 		int lens = s.size();
 		for (int i = 0; i < lens&&ans != -1; i++){
 			if (isalpha(s[i])){
 				int a = chi(s[i]);
-				st.push(matrix(chain[a].row, chain[i].col));
+				st.push(mp(chain[a].row, chain[a].col));
 			}
 			else if (s[i] == ')'){
-				chain[27] = st.top(); st.pop();
-				chain[26] = st.top(); st.pop();
-				if (chain[26].col != chain[27].row){
+				b = st.top(); st.pop();
+				a = st.top(); st.pop();
+				if (a.second == b.first){
+					ans += a.first*a.second*b.second;
+					st.push(mp(a.first, b.second));
+				}
+				else if (b.second == a.first){
+					ans += b.first*b.second*a.second;
+					st.push(mp(b.first, a.second));
+				}
+				else{
 					ans = -1;
 					break;
 				}
-				ans += chain[26].row * chain[27].row * chain[26].col;
-				st.push(matrix(chain[26].row, chain[27].col));
 			}
 		}
 		if (ans == -1)printf("error\n");
