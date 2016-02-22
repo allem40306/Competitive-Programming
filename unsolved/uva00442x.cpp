@@ -31,6 +31,10 @@ int main(){
 		stack <pair<int, int>> st;
 		int lens = s.size();
 		for (int i = 0; i < lens&&ans != -1; i++){
+			if (s[i] == '(' && (s[i + 1] == ')' || s[i + 2] == ')')){
+				ans = -1;
+				break;
+			}
 			if (isalpha(s[i])){
 				int a = chi(s[i]);
 				st.push(mp(chain[a].row, chain[a].col));
@@ -52,7 +56,7 @@ int main(){
 				}
 			}
 		}
-		if (ans == -1)printf("error\n");
+		if (st.size() > 1 || ans == -1)printf("error\n");
 		else printf("%d\n", ans);
 	}
 }
