@@ -17,7 +17,7 @@ int main(){
 	}
 	for (int i = 0; i < mmax; i++){
 		for (int j = l - 1; j >= 0; j--){
-			if (len[j] <= i - 1)cout << ' ';
+			if (len[j] < i + 1)cout << ' ';
 			else cout << a[j][i];
 		}
 		cout << endl;
