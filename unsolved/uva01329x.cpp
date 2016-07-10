@@ -1,9 +1,9 @@
 ﻿#include <iostream>
 #include <cstring>
 #include <cstdio>
+#include <algorithm>
 using namespace std;
 #define N 20010
-#define abs(x) x>=0?x:-x
 int p[N], d[N];
 
 void init(int n){
@@ -40,7 +40,7 @@ int main() {
 				int fb = find(b);
 				if (fa != fb){
 					p[fa] = fb;
-					d[a] = abs(a-b)% 1000 + d[b] - d[a];
+					d[a] = abs(a - b) % 1000 + d[b] - d[a];
 				}
 			}
 		}

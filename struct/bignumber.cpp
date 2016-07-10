@@ -1,9 +1,9 @@
-#include <iostream>
+﻿#include <iostream>
 #include <iomanip>
 #include <string>
 using namespace std;
-#define N 1010
-#define maxlen 20
+#define N 6000
+#define maxlen 200
 
 class Bigint{
 	unsigned long long d[maxlen];
@@ -35,6 +35,7 @@ public:
 		return sum;
 	}
 	friend ostream& operator << (ostream &, Bigint &);
+	friend istream & operator >> (istream &in, Bigint &n);
 };
 
 ostream & operator << (ostream &out, Bigint &n){
@@ -47,17 +48,26 @@ ostream & operator << (ostream &out, Bigint &n){
 	return out;
 }
 
-Bigint dp[N] = { 1, 2, 3 };
 
-void ddp(){
-	for (int i = 3; i < N; i++){
-		dp[i] = dp[i - 1] + dp[i - 2];
+
+istream & operator >> (istream &in, Bigint &n){
+	Bigint bi;
+	string s;
+	in >> s;
+	int lens = s.size(), i = 0, br = 0, b = 18;
+	for (i = lens; i >= 0; i -= 18, br++){
+		if (i > 18)i -= 18, b = 18;
+		else b = i, i = 0;
+		for (; b; i++, b--){
+			bi.d[br] *= 10;
+			bi.d[br] += int(s[i] - '0');
+		}
 	}
+	n = bi;
+	return in;
 }
 
+
 int main(){
-	ddp();
-	int n;
-	while (cin >> n)
-		cout << dp[n] << endl;
+
 }
