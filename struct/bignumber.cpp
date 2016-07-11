@@ -4,7 +4,7 @@
 using namespace std;
 #define N 6000
 #define maxlen 200
-
+#define mod 1000000000000000000ULL
 class Bigint{
 	unsigned long long d[maxlen];
 public:
@@ -29,8 +29,32 @@ public:
 		int c = 0;
 		for (int i = 0; i < maxlen; i++){
 			sum.d[i] = this->d[i] + b.d[i] + c;
-			c = int(sum.d[i] / 1000000000000000000ULL);
-			sum.d[i] %= 1000000000000000000ULL;
+			c = int(sum.d[i] / mod);
+			sum.d[i] %= mod;
+		}
+		return sum;
+	}
+	Bigint operator -(Bigint b){
+		Bigint sum;
+		for (int i = 0; i < maxlen; i++){
+			sum.d[i] = this->d[i] - b.d[i];
+			if (sum.d[i] < 0){
+				this->d[i]--;
+				sum.d[i] += mod;
+			}
+		}
+		return sum;
+	}
+	Bigint operator *(Bigint b){
+		Bigint sum;
+		for (int i = 0; i < maxlen; i++){
+			for (int j = 0; j < maxlen; j++){
+				sum.d[i + j] += this->d[i] * b.d[j];
+			}
+		}
+		for (int i = 0; i < maxlen - 1; i++){
+			sum.d[i + 1] = sum.d[i] / mod;
+			sum.d[i] %= mod;
 		}
 		return sum;
 	}
@@ -69,5 +93,8 @@ istream & operator >> (istream &in, Bigint &n){
 
 
 int main(){
-
+	Bigint a, b;
+	while (cin >> a >> b){
+		cout << a * b << endl;
+	}
 }
