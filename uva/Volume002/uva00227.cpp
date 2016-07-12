@@ -1,108 +1,65 @@
+﻿#include <iostream>
+#include <string>
 #include <stdio.h>
-#include <string.h>
+using namespace std;
+#define N 5
+int x, y, dx, dy, ok;
+
+void move(char ch){
+	if (ch == 'A')dx = x - 1, dy = y;
+	else if (ch == 'B')dx = x + 1, dy = y;
+	else if (ch == 'L')dx = x, dy = y - 1;
+	else if (ch == 'R')dx = x, dy = y + 1;
+	else ok = 0;
+	return;
+}
 
 int main() {
-	int cases = 0;
-	bool line = false;
-	char initial[5][7];
-
-	while (gets_s(initial[0])) {
-
-		if (strcmp(initial[0], "Z") == 0)
-			return 0;
-
-		gets_s(initial[1]);
-		gets_s(initial[2]);
-		gets_s(initial[3]);
-		gets_s(initial[4]);
-
-		int blank_x;
-		int blank_y;
-
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				if (initial[i][j] == ' ') {
-					blank_x = i;
-					blank_y = j;
-					i = j = 5;
+	int ti = 0;
+	string s[N];
+	while (getline(cin, s[0])){
+		if (s[0][0] == 'Z')break;
+		if (s[0].size() < 5){
+			if (s[0][4] == '\n')
+				s[0] += ' ';
+			else
+				s[0] = ' ' + s[0];
+		}
+		for (int i = 1; i < N; i++){
+			getline(cin, s[i]); 
+			if (s[i].size() < 5)s[i] += ' ';
+		}
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < N; j++)
+				if (s[i][j] == ' ')x = i, y = j;
+		string d, d1;
+		while (1){
+			cin >> d1;
+			d += d1;
+			if (d1[d1.size() - 1] == '0')break;
+		}
+		int lend = d.size();
+		ok = 1;
+		char ch;
+		for (int i = 0; i < lend - 1; i++){
+			move(d[i]);
+			if (dx < 0 || dx >= N || dy < 0 || dy >= N){ ok = 0; break; }
+			ch = s[x][y], s[x][y] = s[dx][dy], s[dx][dy] = ch;
+			x = dx, y = dy;
+		}
+		if (ti++)cout << "\n";
+		cout << "Puzzle #" << ti << ":\n";
+		if (!ok)cout << "This puzzle has no final configuration.\n";
+		else{
+			for (int i = 0; i < N; i++){
+				for (int j = 0; j < N; j++){
+					cout << s[i][j];
+					if (j < N - 1)cout << ' ';
 				}
+				cout << endl;
 			}
 		}
-
-		char command[1000];
-		bool valid = true;
-		bool exit_koro = false;
-
-		while (!exit_koro && gets_s(command)) {
-
-			for (int i = 0; command[i] != 0; i++) {
-
-				if (command[i] == '0' || !valid) {
-					exit_koro = true;
-					break;
-				}
-
-				switch (command[i]) {
-				case 'A':
-					if (blank_x == 0)
-						valid = false;
-					else {
-						initial[blank_x][blank_y] = initial[blank_x - 1][blank_y];
-						initial[blank_x - 1][blank_y] = ' ';
-						blank_x--;
-					}
-					break;
-
-				case 'B':
-					if (blank_x == 4)
-						valid = false;
-					else {
-						initial[blank_x][blank_y] = initial[blank_x + 1][blank_y];
-						initial[blank_x + 1][blank_y] = ' ';
-						blank_x++;
-					}
-					break;
-
-				case 'R':
-					if (blank_y == 4)
-						valid = false;
-					else {
-						initial[blank_x][blank_y] = initial[blank_x][blank_y + 1];
-						initial[blank_x][blank_y + 1] = ' ';
-						blank_y++;
-					}
-					break;
-
-				case 'L':
-					if (blank_y == 0)
-						valid = false;
-					else {
-						initial[blank_x][blank_y] = initial[blank_x][blank_y - 1];
-						initial[blank_x][blank_y - 1] = ' ';
-						blank_y--;
-					}
-					break;
-				}
-			}
-		}
-
-		if (line)
-			printf("\n");
-		line = true;
-
-		printf("Puzzle #%d:\n", ++cases);
-
-		if (valid) {
-			for (int i = 0; i < 5; i++) {
-				printf("%c %c %c %c %c\n", initial[i][0], initial[i][1],
-					initial[i][2], initial[i][3], initial[i][4]);
-			}
-		}
-
-		else
-			printf("This puzzle has no final configuration.\n");
-
+		cin >> ws;
 	}
 
-	return 0;
 }
