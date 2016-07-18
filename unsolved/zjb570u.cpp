@@ -12,8 +12,15 @@ int find(int x){
 }
 
 struct budget{
-	int a, b, d;
+	int a, b;
 };
+
+int uni(int a, int b){
+	int fa = find(a), fb = find(b);
+	if (fa == fb)return false;
+	p[fa] = fb;
+	return true;
+}
 
 int main() {
 	static int n, m, q, qq[N];
@@ -21,27 +28,24 @@ int main() {
 		init();
 		static budget b[N];
 		for (int i = 0; i < N; i++)
-			b[i].a = b[i].b = b[i].d = 0;
+			b[i].a = b[i].b = 0;
 		for (int i = 0; i < m; i++)
 			cin >> b[i].a >> b[i].b;
 		cin >> q;
+		static int ans[N], vis[N] = {};
 		for (int i = 0; i < q; i++){
 			cin >> qq[i];
-			b[qq[i] - 1].d = 1;
+			qq[i]--;
+			vis[qq[i]] = 1;;
 		}
 		int tans = n;
 		for (int i = 0; i < m; i++)
-			if (!b[i].d){
-			int fa = find(b[i].a), fb = find(b[i].b);
-			if (fa != fb)tans--;
-			p[fa] = fb;
+			if (!vis[i]){
+			if(uni(b[i].a,b[i].b))tans--;
 			}
-		static int ans[N];
 		for (int i = q - 1; i >= 0; i--){
 			ans[i] = tans;
-			int fa = find(b[qq[i]-1].a), fb = find(b[qq[i]-1].b);
-			if (fa != fb)tans--;
-			p[fa] = fb;
+			if (uni(b[qq[i]].a, b[qq[i]].b))tans--;
 		}
 		for (int i = 0; i < q; i++){
 			cout << ans[i] << endl;
