@@ -1,12 +1,12 @@
-﻿#include <iostream>
+#include <iostream>
 #include <algorithm>
 using namespace std;
-#define N 20000
-int a[N] = {}, ans = 0;
+#define N 40000
+int a[N], maxx, ar, t, n;
 
 struct pay{
 	int s, c, e;
-};
+}p[N];;
 
 bool cmp(pay a, pay b){
 	if (a.s != b.s)
@@ -14,27 +14,26 @@ bool cmp(pay a, pay b){
 	return a.e < b.e;
 }
 
-int check(int i){
-	if (a[i]||i == 0)return a[i];
-	a[i] = check(i-1);
+void dp(int i, int m){
+		{
+			maxx = m>maxx ? m : maxx;
+			for (int j = i + 1; j < n; j++){
+				if (p[i].e < p[j].s)
+				dp(j, m + p[j].c);
+			}
+		}
 }
 
 int main(){
-	int t, n;
-	pay p[N];
 	for (cin >> t; t; t--){
 		cin >> n;
+		for (int i = 0; i < N; i++)
+			p[i].s = p[i].e = p[i].c = 0;
 		for (int i = 0; i < n; i++)
 			cin >> p[i].s >> p[i].e >> p[i].c;
 		sort(p, p + n, cmp);
-		a[N] = {}, ans = 0;
-		for (int i = 0; i < n; i++){
-			check(p[i].s);
-			if (a[p[i].e] < a[p[i].s] + p[i].c){
-				a[p[i].e] = a[p[i].s] + p[i].c;
-				if (ans < a[p[i].e])ans = a[p[i].e];
-			}		
-		}
-		printf("%d\n", ans);
+		a[N] = {}, maxx = ar = 0;
+		for (int i = 0; i<n; i++)dp(0, p[i].c);
+		printf("%d\n", maxx);
 	}
 }
