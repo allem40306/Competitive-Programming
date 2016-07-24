@@ -1,12 +1,12 @@
 ﻿#include <iostream>
 using namespace std;
 #define N 3000
-short a[N][N], b[N][N], c, n;
+bool a[N][N], b[N][N], c, n;
 
 int sum(int x, int y){
-	int sum = 0;
+	bool sum = 0;
 	for (int i = 0; i < n; i++)
-		sum += a[x][i] * b[i][y];
+		if(a[x][i]&b[i][y])sum=!sum;
 	return sum;
 }
 
@@ -19,8 +19,8 @@ int main(){
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < n; j++)
 				cin >> b[i][j];
-		for (int i = 0; i < n; i++)
-			for (int j = 0; j < n; j++){
+		for (int i = 0; flag&&i < n; i++)
+			for (int j = 0; flag&&j < n; j++){
 			cin >> c;
 			if (flag){ if (sum(i, j) % 2 != c)flag = 0; }
 			}
