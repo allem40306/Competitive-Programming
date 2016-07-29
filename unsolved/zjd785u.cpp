@@ -14,15 +14,20 @@ int main() {
 	for (cin >> t; i < t; i++){
 		init();
 		cin >> n >> m;
-		int sum = 0, x;
-		for (int j = 0; j < m; j++){ cin >> x; sum += x; a[x]++; }
-		if (sum % n)printf("0\n");
+		int sum = 0, x, maxx = 0;
+		for (int j = 0; j < m; j++){
+			cin >> x;
+			sum += x;
+			a[x]++; 
+			maxx = x>maxx ? x : maxx;
+		}
+		if (maxx>sum/n||sum % n)printf("0\n");
 		else{
 			int b = sum / n;
 			while (n&&m){
 				int bb = b;
 				for (int k = b; bb&&k; k--)
-					while (a[k] && bb - a[k] >= 0)bb -= a[k],a[k]--,m--;
+					while (a[k] && bb - k >= 0)bb -= k,a[k]--,m--;
 				if (bb)break;
 				n--;
 			}
