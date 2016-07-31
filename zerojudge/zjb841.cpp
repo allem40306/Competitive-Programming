@@ -12,7 +12,6 @@ void dp(int x, int y, int p){
 		if (!vis[i][j] && r < h&&s < w&& !vis[r][s] && a[i][j] == a[r][s]){
 			p++; ans = ans > p ? ans : p;
 			vis[i][j] = vis[r][s] = 1;
-			printf("%d %d +%d %d\n", i, j, r, s);
 			dp(r, s, p);
 			vis[i][j] = vis[r][s] = 0;
 			p--;
