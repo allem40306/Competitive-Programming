@@ -39,5 +39,6 @@ int main(){
 		cin >> len;
 		for (int i = 0; i < len; i++)cin >> arr[i];
 		sol(0, len)
+			printf("%d\n", ans);
 	}
 }

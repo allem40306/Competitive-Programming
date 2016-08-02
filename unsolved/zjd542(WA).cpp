@@ -1,11 +1,11 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cstdio>
 #include <cstring>
 using namespace std;
 #define L 500010
 int arr[L], buf[L];
 
-int sol(int left, int right) {
+long long sol(int left, int right) {
 	if (right - left <= 1)return 0;
 	int middle = (right + left) / 2;
 	long long ans = sol(left, middle) + sol(middle, right);
