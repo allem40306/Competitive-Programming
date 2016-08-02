@@ -16,7 +16,7 @@ long long sol(int left, int right) {
 		else if (j >= right)
 			buf[k] = arr[i++];
 		else {
-			if (arr[i]<arr[j])
+			if (arr[i]<=arr[j])
 				buf[k] = arr[i++];
 			else {
 				buf[k] = arr[j++];
