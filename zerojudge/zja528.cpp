@@ -10,10 +10,10 @@ struct str{
 };
 
 bool cmp(str a, str b){
-	if (a.p!=b.p)
-	return a.p < b.p;
+	if (a.p != b.p)
+		return a.p < b.p;
 	if (a.p == 0){
-	if (a.len != b.len)
+		if (a.len != b.len)
 			return a.len > b.len;
 		for (int i = 1; i < a.len; i++)
 			if (a.s[i] != b.s[i])
@@ -31,7 +31,7 @@ bool cmp(str a, str b){
 
 int main() {
 	int n;
-	while (cin >> n, n){
+	while (cin >> n){
 		str a[N];
 		for (int i = 0; i < n; i++){
 			cin >> a[i].s;
@@ -40,6 +40,6 @@ int main() {
 		}
 		sort(a, a + n, cmp);
 		for (int i = 0; i < n; i++)
-			cout << a[i].s<< endl;
+			cout << a[i].s << endl;
 	}
 }
