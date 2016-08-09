@@ -3,12 +3,12 @@
 #include <algorithm>
 using namespace std;
 #define N 10005
-int sr;
-string a, b;
+int sr, j;
+string a[N], b[N];
 
 struct str{
 	string a;
-	bool wr,ac;
+	bool wr, ac;
 }s[N];
 
 void init(){
@@ -19,25 +19,27 @@ void init(){
 
 int strech(){
 	for (int i = 0; i < sr; i++)
-		if (s[i].a == a)return i;
-	s[sr++].a = a;
+		if (s[i].a == a[j])return i;
+	s[sr++].a = a[j];
 	return sr - 1;
 }
 
 int main(){
 	int n, x = 0, y = 0;
-	sr = -1;
+	sr = 0;
 	init();
 	cin >> n;
 	for (int i = 0; i < n; i++){
-		cin >> a >> b;
-		int len = strech();
-		if (b == "AC"){
-			if (s[len].ac)continue;
-			s[len].ac = true; x++;
-			if (!s[len].wr)y++;
-		}
-		else{ s[len].wr = true; }
+		cin >> a[i] >> b[i];
 	}
+	for (j = n-1; j >= 0; j--){
+		int len = strech();
+			if (b[j] == "AC"){
+				if (s[len].ac)continue;
+				s[len].ac = true; x++;
+				if (!s[len].wr)y++;
+			}
+			else{ s[len].wr = true; }
+	}	
 	printf("%d%s\n", y * 100 / x, "%");
 }
