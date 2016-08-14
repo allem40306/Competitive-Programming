@@ -3,7 +3,7 @@
 #include <sstream>
 using namespace std;
 #define N 10
-#define M 50000
+#define M 50010
 
 int main(){
 	unsigned int i, j;
