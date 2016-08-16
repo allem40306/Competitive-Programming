@@ -4,6 +4,7 @@
 using namespace std;
 #define N 1000
 int r = 0;
+
 struct peopple{
 	string p;
 	int f, depth;
@@ -12,7 +13,7 @@ struct peopple{
 
 void init(){
 	for (int i = 0; i < N; i++){
-		p[i].f = p[i].depth = -1;
+		p[i].f = -1;
 		p[i].p = "";
 		}
 	return;
@@ -36,33 +37,29 @@ int main(){
 			stringstream ss(s);
 			ss >> t;
 			fn = find(t);
-			if (p[fn].depth == -1)p[fn].depth = 0;
 			while (ss >> t){
 				en = find(t);
 				p[en].f = fn;
-				p[en].depth = p[fn].depth + 1;
 			}
 		}
 		string a, b;
 		cin >> a >> b;
 		int an = find(a), bn = find(b), c;
 		if (p[an].depth < p[bn].depth){ c = an; an = bn; bn = c; }
-		int an2 = an, bn2 = bn;
 		bool vis[N] = { 0 }, out = 0;
-		while (!out&&an != -1){
-			vis[an] = 1;
-			if (p[an].f == bn2){
-				printf("%d\n", p[an2].depth - p[bn2].depth);
+		for (int an2 = an, i = 0; !out&&an2 != -1; i++, an2 = p[an2].f){
+			p[an2].depth = i;
+			vis[an2] = 1;
+			if (an2 == bn){
+				printf("%d\n", i);
 				out = 1;
 			}
-			an = p[an].f;
 		}
-		while (!out){
-			if (vis[bn]){
+		for (int bn2 = bn, i = 0; !out; i++, bn2 = p[bn2].f){
+			if (vis[bn2]){
+				printf("%d\n", i+p[bn2].depth);
 				out = 1;
-				printf("%d\n",p[an2].depth + p[bn2].depth-p[bn].depth * 2);
 			}
-			bn = p[bn].f;
 		}
 	}
 }
