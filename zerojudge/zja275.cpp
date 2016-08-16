@@ -1,6 +1,6 @@
 #include<cstdio>
 #include<string.h>
-
+//language c
 int main(){
 	char s1[1000001], s2[1000001];
 	while (scanf_s("%s", s1), !strcmp(s1, "STOP!!")){
