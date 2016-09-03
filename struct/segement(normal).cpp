@@ -3,9 +3,7 @@
 #include <string>
 #include <cstdio>
 using namespace std;
-#define scanf scanf_s
-
-int n,arr[300000], heap[600000];
+int n, arr[300000], heap[600000];
 
 void init() {
 	memset(arr, 0, sizeof(arr));
@@ -13,7 +11,7 @@ void init() {
 	return;
 }
 
-int bulit(int L, int R,int x) {
+int bulit(int L, int R, int x) {
 	if (L == R)
 		return heap[x - 1] = arr[L];
 	int M = (L + R) / 2;
@@ -44,12 +42,12 @@ int ans;
 
 void quest(int L, int R, int x) {
 	if (a <= L&&R <= b){
-		ans += heap[x-1];
+		ans += heap[x - 1];
 		return;
 	}
 	int M = (L + R) / 2;
 	if (a <= M)quest(L, M, (x << 1));
-	if (b > M)quest(M+1, R, (x << 1) + 1);
+	if (b > M)quest(M + 1, R, (x << 1) + 1);
 	return;
 }
 
@@ -66,6 +64,7 @@ int main() {
 			scanf("%d %d", &a, &b);
 			if (ch == 'S') {
 				mo = b - arr[a];
+				arr[a] = b;
 				modify(1, n, 1);
 			}
 			else if (ch == 'M') {
