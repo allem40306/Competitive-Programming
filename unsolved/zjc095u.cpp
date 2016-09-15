@@ -19,12 +19,11 @@ int main() {
 			cin >> ch;
 			if (ch == '=')
 				for (int pi = 0; pi < p; pi++){
-				it = w.find(a[pi]);
-				if(*it<0)w.erase(it);
-				it = w.find(b[pi]);
-				if(*it<0)w.erase(it);
+				if (w.count(a[pi]))w.erase(a[pi]);
+				if (w.count(b[pi]))w.erase(b[pi]);
 				}
 		}
+		if (mi)printf("\n");
 		if (w.size()>1)printf("0\n");
 		else {
 			it = w.begin();
