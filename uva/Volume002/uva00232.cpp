@@ -1,99 +1,54 @@
-#include <iostream>
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-#include <cctype>
+﻿#include <iostream>
+#include <iomanip>
 #include <string>
-#include <algorithm>
-#include <numeric>
+#include <cctype>
 using namespace std;
+#define N 10
 
-bool cmp(pair<int, string> a, pair<int, string> b)  {
-    return a.first < b.first;
-}
-
+struct pans{
+	string s;
+	int n;
+};
 int main() {
-    char Map[15][15];
-    int Mapf[15][15];
-    int x, y, cnt = 0;
-
-    while(cin >> x) {
-        if(x) cin >> y;
-        else break;
-        for(int i = 0; i < 15; i++) {
-            for(int j = 0; j < 15; j++) {
-                Map[i][j] = '*';
-
-            }
-        }
-        memset(Mapf, 0, sizeof(Mapf));
-        pair<int, string> p[1001];
-        int cur = 0;
-
-
-        for(int i = 1; i <= x; i++) {
-            for(int j = 1; j <= y; j++) {
-                cin >> Map[i][j];
-                if(Map[i][j] == '*') {
-                    Mapf[i][j] = -1;
-                } else {
-                    if(i - 1 < 1 || j - 1 < 1 || Map[i - 1][j] == '*' || Map[i][j - 1] == '*') Mapf[i][j] = ++cur;
-                    else Mapf[i][j] = -1;
-                }
-            }
-        }
-        /*for(int i = 1; i <= x; i++) {
-            for(int j = 1; j <= y; j++) {
-                cout << Mapf[i][j] << " ";
-            }
-            cout << endl;
-        }*/
-        if(cnt) cout << endl;
-        int last = 0;
-        printf("puzzle #%d:\n", ++cnt);
-        cout << "Across" << endl;
-        for(int i = 1; i < 15; i++) {
-            string str = "";
-            for(int j = 1; j < 15; j++) {
-                if(Map[i][j] != '*') {
-                    if(str == "") last = Mapf[i][j];
-                    str += Map[i][j];
-                } else {
-                    if(str != "") {//cout << "  " << last << "." << str << endl;
-                        printf("%3d.", last);
-                        cout << str << endl;
-                    }
-                    str = "";
-                }
-
-            }
-        }
-
-        cout << "Down" << endl;
-        int pcu = 0;
-        for(int j = 1; j < 15; j++) {
-            string str = "";
-            for(int i = 1; i < 15; i++) {
-                if(Map[i][j] != '*') {
-                    if(str == "") last = Mapf[i][j];
-                    str += Map[i][j];
-                } else {
-                    if(str != "") {
-                        p[pcu].first = last;
-                        p[pcu++].second = str;
-                    //cout << "  " << last << "." << str << endl;
-                        str = "";
-                    }
-                }
-
-            }
-        }
-        sort(p, p + pcu, cmp);
-        for(int i = 0; i < pcu; i++) {
-            printf("%3d.", p[i].first);
-            cout << p[i].second<<endl;
-        }
-    }
-
-    return 0;
-} 
+	int r, c, ti = 1;
+	while (cin >> r,r){
+		cin >> c;
+		int t = 1, prr = 0, pcr = 0;
+		string s[N];
+		pans pr[N*N], pc[N*N];
+		for (int i = 0; i < r; i++)cin >> s[i];
+		for (int i = 0; i < r; i++){
+			for (int j = 0; j < c; j++){
+				if (!isalpha(s[i][j]))continue;
+				string r1 = "", r2 = "";
+				int k1 = j, k2 = i;
+				if(k1==0||!isalpha(s[i][k1-1]))
+				for (; k1 < c; k1++){
+					if (!isalpha(s[i][k1]))break;
+					r1 += s[i][k1];
+				}
+				if (k2==0||!isalpha(s[k2 - 1][j]))
+				for (; k2 < r; k2++){
+					if (!isalpha(s[k2][j]))break;
+					r2 += s[k2][j];
+				}
+				bool used = 0;
+				if (r1 != ""){ used = 1; pr[prr].n = t; pr[prr++].s = r1; }
+				if (r2 != ""){ used = 1; pc[pcr].n = t; pc[pcr++].s = r2; }
+				if(used)t++;
+			}
+		}
+		if(ti>1)printf("\n");
+		printf("puzzle #%d:\n", ti++);
+		printf("Across\n");
+		for (int i = 0; i < prr; i++){
+			printf("%3d.", pr[i].n);
+			cout << pr[i].s << endl;
+		}
+		printf("Down\n");
+		for (int i = 0; i < pcr; i++){
+			printf("%3d.", pc[i].n);
+			cout << pc[i].s << endl;
+		}
+	}
+}
