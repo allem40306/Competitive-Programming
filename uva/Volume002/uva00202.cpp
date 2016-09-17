@@ -1,38 +1,27 @@
-#include <iostream>
-#include <cstdlib>
+﻿#include <iostream>
 #include <cstring>
-#include <cstdio>
-
 using namespace std;
-
-int r[3003],u[3003],s[3003];
-
-int main()
-{
-	int n,m,t;
-	while (cin >> n >> m) {
-		t = n;
-		memset(r, 0, sizeof(r));
-		memset(u, 0, sizeof(u));
-		int count = 0;
-		r[count ++] = n/m;
-		n = n%m;
-		while (!u[n] && n) {
-			u[n] = count;
-			s[count] = n;
-			r[count ++] = 10*n/m;
-			n = 10*n%m;
+#define N 3005
+#define Min(x,y) x<y?x:y
+int main(){
+	int x, y;
+	while (cin >> x >> y){
+		printf("%d/%d = ", x, y);
+		int a[N] = {}, r, r1, mod[N] = { 0 }, re;
+		memset(mod, -1, sizeof(mod));
+		for (r = 0;; r++){
+			a[r] = x / y;
+			if (mod[x%y] != -1){ r1 = mod[x%y]; re = r - r1 + 1; break; }
+			mod[x%y] = r + 1;
+			x = x%y * 10;
 		}
-		printf("%d/%d = %d",t,m,r[0]);
-		printf(".");
-		for (int i = 1 ; i < count && i <= 50 ; ++ i) {
-			if (n && s[i] == n) printf("(");
-			printf("%d",r[i]);
-		}
-		if (!n) printf("(0");
-		if (count > 50) printf("...");
+		printf("%d.", a[0]);
+		for (int i = 1; i < r1; i++)printf("%d", a[i]);
+		printf("(");
+		for (int i = 0, j = Min(50, re); i < j; i++)
+			printf("%d", a[r1 + i]);
+		if (re > 50)printf("...");
 		printf(")\n");
-		printf("   %d = number of digits in repeating cycle\n\n",!n?1:count-u[n]);
+		printf("   %d = number of digits in repeating cycle\n\n", re);
 	}
-	return 0;
 }

@@ -1,43 +1,29 @@
-#include<cstdio>
-#include<cstring>
+﻿#include <iostream>
+#include <string>
+using namespace std;
+#define N 1005
 
-
-char DNA[51][1010],s[1100];
-int pos[4]= {0,2,6,19},m,n,d[1100];
-int main()
-{
-    int t,pd[26];
-    scanf("%d",&t);
-    while(t--)
-    {
-        memset(s,0,sizeof(s));
-        memset(d,0,sizeof(d));
-        scanf("%d %d",&m,&n);
-        for(int i = 0; i < m; i++)
-            scanf("%s",DNA[i]);
-        for(int j = 0; j < n; j++)
-        {
-            memset(pd,0,sizeof(pd));
-            for(int i = 0; i < m; i++)
-            {
-                pd[DNA[i][j]-'A']++;
-            }
-            int max = 0;
-            for(int i = 0; i < 4; i++)
-            {
-                if(max < pd[pos[i]])
-                {
-                    max = pd[pos[i]];
-                    s[j] = pos[i]+'A';
-                }
-            }
-            d[j] = max;
-        }
-        puts(s);
-        int temp=0;
-        for(int i = 0; i < n; i++)
-            temp += d[i];
-        printf("%d\n",m*n-temp);
-    }
-    return 0;
+int main(){
+	string s[N], s1 = "ACGT";
+	int t,ti = 0,n,m;
+	for (cin >> t; ti < t; ti++){
+		cin >> n >> m;
+		int ans = 0; string s2 = "";
+		for (int i = 0; i < n; i++)cin >> s[i];
+		for (int i = 0; i < m; i++){
+			int a[4] = {};
+			for (int j = 0; j < n; j++){
+				if (s[j][i] < 'D')
+					s[j][i] == 'A' ? a[0]++ : a[1]++;
+				else
+					s[j][i] == 'G' ? a[2]++ : a[3]++;
+			}
+			int maxi = 0, maxv = 0;
+			for (int k = 0; k < 4; k++){
+				if (a[k]>maxv){ maxi = k; maxv = a[k]; }
+			}
+			s2 += s1[maxi]; ans += n - maxv;
+		}
+		cout << s2; printf("\n%d\n",ans);
+	}
 }
