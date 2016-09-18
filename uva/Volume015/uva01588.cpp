@@ -1,47 +1,27 @@
-#include <iostream>  
-#include <cstdio>  
-#include <cstring>  
-#include <algorithm>  
-#include <string>  
-using namespace std;  
-char s1[110],s2[110];  
-int n1[210],n2[210];  
-int main()  
-{  
-    int i,j;  
-    while (~scanf("%s%s",s1,s2))  
-    {  
-        memset(n1,0,sizeof(n1));  
-        memset(n2,0,sizeof(n2));  
-        int len1=strlen(s1);  
-        int len2=strlen(s2);  
-        for (i=0;i<len1;i++)  n1[i]=s1[i]-'0';  
-        for (i=0;i<len2;i++)  n2[i]=s2[i]-'0';  
-        int minlen=max(len1,len2);  
-        for (i=0;i<len1;i++)  
-        {  
-            for (j=0;j<len2;j++)  
-            {  
-                if (n1[i+j]+n2[j]>=4)  
-                    break;  
-            }  
-            if (j==len2)  
-                break;  
-        }  
-        int le1=len2+i;  
-        for (i=0;i<len2;i++)  
-        {  
-            for (j=0;j<len1;j++)  
-            {  
-                if (n2[i+j]+n1[j]>=4)  
-                    break;  
-            }  
-            if (j==len1)  
-                break;  
-        }  
-        int le2=i+len1;  
-        minlen=max(minlen,min(le1,le2));  
-        printf("%d\n",minlen);  
-    }  
-    return 0;  
-}  
+﻿#include <iostream>
+#include <string>
+using namespace std;
+#define Min(x,y) x<y?x:y
+#define Max(x,y) x>y?x:y
+
+int solve(string s1, string s2){
+	int len1 = s1.size(), len2 = s2.size();
+	for (int i = 0; i < len1; i++){
+			int j1 = i, j2 = 0;
+			while (1){
+				if (j1 >= len1 || j2 >= len2)return Max(len1, len2+i);
+				if (s1[j1] == '2'&&s2[j2] == '2')break;
+				j1++; j2++;
+			}
+		}
+	return len1 + len2;
+}
+
+int main(){
+	string s1, s2;
+	while (cin >> s1){
+		cin >> s2;
+		int ans = Min(solve(s1, s2), solve(s2, s1));
+		printf("%d\n", ans);
+	}
+}
