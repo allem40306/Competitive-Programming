@@ -1,7 +1,11 @@
-#include <iostream>
+﻿#include <iostream>
 using namespace std;
-int main(){
-	int a, k;
-	while (cin>>a>>k)
-		cout << (a^k) << endl;
+
+
+int main() {
+	int a, b;
+	while (cin >> a >> b){
+		a ^= b;
+		cout << a << endl;
+	}
 }
