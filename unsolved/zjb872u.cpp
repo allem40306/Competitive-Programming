@@ -1,54 +1,37 @@
 ﻿#include <iostream>
+#include <iomanip>
 #include <map>
+#include <cstring>
 using namespace std;
-#define MP make_pair
-struct line{
-	int x, y;
-	line(int x, int y) :x(x), y(y){}
-};
-map <line, int> ma;
-map <line, int>::iterator it;
+#define N 1000
+map <double, int> ma;
+map <double, int>::iterator it;
+int t, ti = 0, n, ans;
+bool c[N];
+double a[N][2];
 
-
-	int gcd(int a, int b){
-	if (!a || !b)return 0;
-	int r;
-	while (r = a%b){ a = b; b = r; }
-	return b;
+void init(){
+	ans = 0;
+	ma.clear();
+	memset(c, 0, sizeof(c));
+	cin >> n;
+	for (int i = 0; i < n; i++)
+		cin >> a[i][0] >> a[i][1];
 }
-
-void bulit(int a, int b){
-	int g;
-	if (a<0 && b<0){
-		g = gcd(-1 * a, -1 * b);
-		ma[line(-1 * a / g, -1 * b / g)]++;
-	}
-	else if (a < 0 || b < 0){
-		if (b < 0){
-			g = gcd(a, -1 * b);
-			ma[line(-1 * a / g, -1 * b / g)]++;
-		}
-		else{
-			g = gcd(-1 * a, b);
-			ma[line(a / g, b / g)]++;
-		}
-	}
-	else{
-		g = gcd(a, b);
-		ma[line(a / g, b / g)]++;
-	}
-	return;
-}
-
 
 int main() {
-	int t, ti = 0, n, a, b, x, y;
 	for (cin >> t; ti < t; ti++) {
-		cin >> n >> a >> b;
-		ma.clear();
-		for (int ni = 1; ni < n; ni++){
-			cin >> x >> y;
-			bulit(x - a, b - y);
-		}
+		init();
+		for (int i = 0; i < n - 1; i++)
+			for (int j = i + 1; j < n; j++)
+				ma[(a[j][1] - a[i][1]) / (a[j][0] - a[i][0])]++;
+		it = ma.begin();
+		for (int i = 0; i < n - 1; i++)
+			for (int j = i + 1; j < n; j++)
+				if ((a[j][1] - a[i][1]) / (a[j][0] - a[i][0]) == it->first)
+					c[i] = c[j] = 1;
+		for (int i = 0; i < n; i++)
+			if (c[i])ans++;
+		printf("%d\n", ans);
 	}
 }
