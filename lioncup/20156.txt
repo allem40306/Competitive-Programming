@@ -1,0 +1,15 @@
+int  b[5], s[5] = { 100, 75, 45, 20, 3 }, p[5] = { 30, 18, 10, 5, 1 }, aa[N], ans = 0; 
+		bool a[N];
+		for (int i = 0; i < N; i++){ a[i] = 0; aa[i] = 0; } a[0] = 1;
+		int n = int::Parse(textBox1->Text); b[0] = int::Parse(textBox2->Text); b[1] = int::Parse(textBox3->Text);
+		b[2] = int::Parse(textBox4->Text); b[3] = int::Parse(textBox5->Text); b[4] = int::Parse(textBox6->Text);
+		for (int i = 0; i < 5; i++){
+			for (int j = n; j >= 0; j--){
+				for (int k = b[i]; k; k--)
+					if (j - k*p[i] >= 0 && aa[j - k*p[i]] + k*s[i]>aa[j])
+						aa[j] = aa[j - k*p[i]] + k*s[i];
+				}
+			}
+		for (int i = 0; i <= N; i++)
+			ans = std::max(ans, aa[i]);
+		textBox7->Text = ans.ToString();

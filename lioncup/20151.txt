@@ -1,0 +1,15 @@
+textBox2->Text = "";
+		int n = int::Parse(textBox1->Text);
+		int a[100], k = 0, l = 0;
+		for (int i = 1; i <= 9; i++)
+			for (int j = 1; j <= 9; j++)
+				a[k++] = i*j;
+		std::sort(a, a + 81);
+		for (int i = 0; i < 81; i++) {
+			if (a[i] != l && (a[i] / 10 == n || a[i] % 10 == n)) {
+				if (n == 0 && (a[i] / 10) == 0)continue;
+				if (l)textBox2->Text += "\r";
+				textBox2->Text += (a[i]).ToString();
+				l = a[i];
+			}
+		}

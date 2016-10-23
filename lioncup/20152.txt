@@ -1,0 +1,7 @@
+textBox2->Text = "";
+		int n = int::Parse(textBox1->Text), ans = 0, i = 2;
+		for (i = 2; i <= n / i;i++){
+			while (!(n%i)){ ans++; n /= i; }
+		}
+		ans += (n != 1);
+		textBox2->Text = ans.ToString();

@@ -1,0 +1,9 @@
+textBox3->Text = "";
+		int n = int::Parse(textBox1->Text), i = 0, ans = 0;
+		String ^ s = textBox2->Text; String ^ s2="0123456789ABCDEF";
+		for (; s[0] != s2[i]; i++);
+		while (n){
+			if (n % 16 == i)ans++;
+			n /= 16;
+		}
+		textBox3->Text = ans.ToString();
