@@ -1,0 +1,9 @@
+double f[201];
+		f[0] = double::Parse(textBox1->Text);
+		int n = int::Parse(textBox2->Text);
+		for (int i = 1; i <= 200; i++)
+			f[i] = f[i - 1] + i*3.14159;
+		f[n] *= 1000000;
+		if (int(f[n]) % 1 >= 5)f[n] + 10;
+		f[n] /= 10;
+		textBox3->Text = (int(f[n]) / 100000).ToString() + "." + (int(f[n]) % 100000).ToString();
