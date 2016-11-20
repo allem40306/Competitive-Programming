@@ -1,10 +1,11 @@
-﻿#include <iostream>
+#include <iostream>
 #include <iomanip>
 #include <string>
 using namespace std;
 #define N 6000
 #define maxlen 200
-#define mod 1000000000000000000ULL
+#define M 10
+#define mod 10000000000ULL
 class Bigint{
 	unsigned long long d[maxlen];
 public:
@@ -53,7 +54,7 @@ public:
 			}
 		}
 		for (int i = 0; i < maxlen - 1; i++){
-			sum.d[i + 1] = sum.d[i] / mod;
+			sum.d[i + 1] += sum.d[i] / mod;
 			sum.d[i] %= mod;
 		}
 		return sum;
@@ -68,7 +69,7 @@ ostream & operator << (ostream &out, Bigint &n){
 	out << n.d[i];
 	out << setfill('0');
 	for (i--; i >= 0; i--)
-		out << setw(18) << n.d[i];
+		out << setw(M) << n.d[i];
 	return out;
 }
 
@@ -78,9 +79,9 @@ istream & operator >> (istream &in, Bigint &n){
 	Bigint bi;
 	string s;
 	in >> s;
-	int lens = s.size(), i = 0, br = 0, b = 18;
-	for (i = lens; i >= 0; i -= 18, br++){
-		if (i > 18)i -= 18, b = 18;
+	int lens = s.size(), i = 0, br = 0, b = M;
+	for (i = lens; i >= 0; i -= M, br++){
+		if (i > M)i -= M, b = M;
 		else b = i, i = 0;
 		for (; b; i++, b--){
 			bi.d[br] *= 10;

@@ -1,10 +1,8 @@
-﻿#include <iostream>
-#include <string>
-#include <algorithm>
+#include <iostream>
+#include <cmath>
 using namespace std;
 #define N 31
 int a[N] = { 1 };
-string s = "13";
 
 int bulit(){
 	int m = 3;
@@ -17,19 +15,18 @@ int bulit(){
 
 int main() {
 	bulit();
-	int t,k;
+	long long t, k, k1, r; bool p;
 	cin >> t;
 	while (t--){
 		cin >> k;
-		int k1 = k % 3, p = 1;
-		if (k <= 3)cout << k << endl;
-		else if (k1 == 2)cout << k1 << endl;
+		k1 = (k + 2) / 3;
+		if (k % 3 == 2)printf("2\n");
 		else{
-			for (int i = N - 1; i >= 0; i--){
-				if (k - a[i] > 0){ k -= a[i]; p = 4 - p; }
+			for (r = int(log2(k1)) && (p = 1); r >= 0; r--){
+				if (k1 > pow(2, r)){ k1 -= pow(2, r); p = !p; }
 			}
-			if (k1)cout <<p<< endl;
-			else cout << 4 - p << endl;
+			if ((k % 3 && p) && (!(k % 3) && !p))printf("1\n");
+			else printf("3\n");
 		}
 	}
 }
