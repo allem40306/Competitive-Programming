@@ -1,4 +1,4 @@
-ï»¿//a001. å“ˆå›‰ by Snail
+//a001. «¢Åo by Snail
 #include <iostream>
 #include <string>
 using namespace std;
@@ -6,6 +6,6 @@ using namespace std;
 int main() {
 	string ch;
 	while (cin >> ch) {
-		cout << "hello, " << ch << endl;
+		cout <<"hello, "<< ch << endl;
 	}
 }

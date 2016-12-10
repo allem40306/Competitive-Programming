@@ -1,11 +1,9 @@
-//a022 迴文
-
 #include <iostream>
 #include <string>
 #include <algorithm>
 using namespace std;
-int main(){
 
+int main(){
 	string i, ii;
 	int a;
 	while (cin >> i){
@@ -14,7 +12,6 @@ int main(){
 			i.erase(a / 2, 1); //將中間字元消除 ( 其實在這題中消掉中間字元沒多大意義 =="" )
 		ii = i;
 		reverse(i.begin(), i.end());         //將字串倒過來排
-
 		if (i == ii)                   //如果倒過來後字串與原自串相同
 			cout << "yes" << endl;
 		else

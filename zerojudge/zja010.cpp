@@ -1,12 +1,12 @@
-ï»¿#include<iostream>
+#include<iostream>
 using namespace std;
 int main() {
-	int n, i, count, begin;      //beginå› æ•¸åˆ†è§£çš„é–‹å§‹ï¼Œ1è¡¨ç¤ºé–‹å§‹ï¼Œ0è¡¨ç¤ºä¸æ˜¯ç¬¬ã„§å€‹å› æ•¸è¼¸å‡º
+	int n, i, count, begin;      //begin¦]¼Æ¤À¸Ñªº¶}©l¡A1ªí¥Ü¶}©l¡A0ªí¥Ü¤£¬O²Ä£¸­Ó¦]¼Æ¿é¥X
 	while (cin >> n){
 		i = 2;
 		begin = 1;
 		while (i <= n){
-			count = 0;                  //countç‚ºç´€éŒ„å› æ•¸çš„å€‹æ•¸
+			count = 0;                  //count¬°¬ö¿ý¦]¼Æªº­Ó¼Æ
 			while (n%i == 0){
 				count++;
 				n /= i;

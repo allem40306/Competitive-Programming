@@ -1,13 +1,13 @@
-﻿#include<iostream>
+#include <iostream>
 #include <string>
 #include <cstdlib>
 using namespace std;
 
 #define N 13
 
-int int7[N] = { 1000, 900, 500, 400, 100,
-90, 50, 40, 10, 9, 5, 4, 1 };
-string str7[N] = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+int int7[N] = { 1000, 900, 500,400, 100,
+				90, 50,40, 10,9 ,5,4, 1 };
+string str7[N] = { "M","CM", "D","CD", "C","XC", "L","XL", "X","IX", "V","IV", "I" };
 
 
 string numToRom(int num)
@@ -26,7 +26,7 @@ string numToRom(int num)
 
 #define M 7
 
-int qq[M] = { 1, 5, 10, 50, 100, 500, 1000 };
+int qq[M] = {1, 5, 10, 50, 100, 500, 1000};
 string rr = "IVXLCDM";
 
 int f(char ch)
@@ -52,7 +52,6 @@ int romToNum(string rom)
 	}
 	return res;
 }
-
 
 int main(){
 	string a, b;

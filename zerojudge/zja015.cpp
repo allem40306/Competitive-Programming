@@ -1,8 +1,8 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <algorithm>
 using namespace std;
-
+	
 int main(){
 	int a[105][105] = {};
 	int r, c;
@@ -14,7 +14,7 @@ int main(){
 		for (int i = 0; i < c; i++){
 			for (int j = 0; j < r; j++){
 				if (j)cout << " ";
-				cout << a[j][i];
+				cout<< a[j][i];
 			}
 			cout << endl;
 		}

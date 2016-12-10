@@ -1,9 +1,9 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 
 int main() {
 	int n, a[50], i;
-	while (scanf_s("%d", &n)){
+	while (scanf("%d", &n)){
 		if (n == 0)break;
 		for (i = 0; i < 50; i++)a[i] = 0;
 		i = 0;

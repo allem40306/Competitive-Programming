@@ -1,10 +1,10 @@
-ï»¿#include <iostream>
+#include <iostream>
 using namespace std;
 
 int main(){
 	int num[9][9], found, sum;
 	while (cin >> num[0][0]){
-		for (int i = 1; i<9; i++){    //è¼¸å…¥æ•¸ç¨åˆ°numé™£åˆ— 
+		for (int i = 1; i<9; i++){    //¿é¤J¼Æ¿W¨ìnum°}¦C 
 			cin >> num[0][i];
 		}
 		for (int i = 1; i<9; i++){
@@ -13,7 +13,7 @@ int main(){
 			}
 		}
 		found = 0;
-		for (int i = 0; i<9; i++){     //åˆ¤æ–·æ©«å‘æ˜¯å¦ç¬¦åˆæ•¸ç¨ 
+		for (int i = 0; i<9; i++){     //§PÂ_¾î¦V¬O§_²Å¦X¼Æ¿W 
 			sum = 0;
 			for (int j = 0; j<9; j++){
 				sum += num[i][j];
@@ -23,7 +23,7 @@ int main(){
 				break;
 			}
 		}
-		for (int i = 0; i<9; i++){      //åˆ¤æ–·ç›´å‘æ˜¯å¦ç¬¦åˆæ•¸ç¨ 
+		for (int i = 0; i<9; i++){      //§PÂ_ª½¦V¬O§_²Å¦X¼Æ¿W 
 			sum = 0;
 			for (int j = 0; j<9; j++){
 				sum += num[j][i];
@@ -33,7 +33,7 @@ int main(){
 				break;
 			}
 		}
-		for (int k = 0; k<9; k = k + 3){     //åˆ¤æ–·ç¬¬ä¸€åˆ—åˆ°ç¬¬ä¸‰åˆ—çš„ä¸‰å€‹ä¹å®®æ ¼æ˜¯å¦ç¬¦åˆæ•¸ç¨ 
+		for (int k = 0; k<9; k = k +3){     //§PÂ_²Ä¤@¦C¨ì²Ä¤T¦Cªº¤T­Ó¤E®c®æ¬O§_²Å¦X¼Æ¿W 
 			sum = 0;
 			for (int i = k; i<k + 3; i++){
 				for (int j = 0; j<3; j++){
@@ -45,7 +45,7 @@ int main(){
 				break;
 			}
 		}
-		for (int k = 0; k<9; k = k + 3){    //åˆ¤æ–·ç¬¬å››åˆ—åˆ°ç¬¬å…­åˆ—çš„ä¸‰å€‹ä¹å®®æ ¼æ˜¯å¦ç¬¦åˆæ•¸ç¨ 
+		for (int k = 0; k<9; k = k + 3){    //§PÂ_²Ä¥|¦C¨ì²Ä¤»¦Cªº¤T­Ó¤E®c®æ¬O§_²Å¦X¼Æ¿W 
 			sum = 0;
 			for (int i = k; i<k + 3; i++){
 				for (int j = 3; j<6; j++){
@@ -57,7 +57,7 @@ int main(){
 				break;
 			}
 		}
-		for (int k = 0; k<9; k = k + 3){     //åˆ¤æ–·ç¬¬ä¸ƒåˆ—åˆ°ç¬¬ä¹åˆ—çš„ä¸‰å€‹ä¹å®®æ ¼æ˜¯å¦ç¬¦åˆæ•¸ç¨ 
+		for (int k = 0; k<9; k = k +3){     //§PÂ_²Ä¤C¦C¨ì²Ä¤E¦Cªº¤T­Ó¤E®c®æ¬O§_²Å¦X¼Æ¿W 
 			sum = 0;
 			for (int i = k; i<k + 3; i++){
 				for (int j = 6; j<9; j++){
