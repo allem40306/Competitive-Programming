@@ -9,40 +9,41 @@ struct Node{
     Node(): next(-1) {}
 };
 int main(){
-    int n,m,x,y,pr=-1,end[N];
+    int n,m,x,y,pr=-1,en[N];
     string s;
     Node head[N],p[M];
-    memset(end,-1,sizeof(end));
+    memset(en,-1,sizeof(en));
     cin>>n>>m;
     for(int i=0;i<m;i++){
         cin>>s;
         if(s[0]=='A'){
             cin>>x>>y;
             p[++pr].value=y;
-            if(end[x]!=-1)p[end[x]].next=pr;
+            if(en[x]!=-1)p[en[x]].next=pr;
             else head[x].next=pr;
-            end[x]=pr;
+            en[x]=pr;
         }else if(s[0]=='L'){
             cin>>x;
-            if(end[x]==-1)
+            if(en[x]==-1)
                 printf("queue %d is empty!\n",x);
             else{
                 head[x].next=p[head[x].next].next;
-                if(head[x].next==-1)end[x]=-1;
+                if(head[x].next==-1)en[x]=-1;
             }
         }else{
             cin>>x>>y;
-            if(end[y]!=-1)
-                p[end[y]].next=head[x].next;
+            if(en[x]==-1)continue; 
+            if(en[y]!=-1)
+                p[en[y]].next=head[x].next;
             else
                 head[y].next=head[x].next;
-            end[y]=end[x];
-			head[x].next=end[x]=-1;     
+            en[y]=en[x];
+			head[x].next=en[x]=-1;     
         }
     }
         for(int i=1;i<=n;i++){
             printf("queue %d:",i);
-            if(end[i]==-1){
+            if(en[i]==-1){
                 printf(" empty\n");
                 continue;
             }
