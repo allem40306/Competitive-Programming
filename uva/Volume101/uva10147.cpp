@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 #define N 1000
 #define pd(x,y) (x-y)*(x-y)
@@ -8,7 +8,7 @@ int main(){
 	int n, m, ti;
 	cin >> ti;
 	while (ti--){
-		int x[N], y[N], w[N][N], i, j, v1, v2;
+		static int x[N], y[N], w[N][N], i, j, v1, v2;
 		cin >> n;
 		for (i = 0; i < n; i++)
 			cin >> x[i] >> y[i];
@@ -18,14 +18,14 @@ int main(){
 		cin >> m;
 		for (i = 0; i < m; i++){
 			cin >> v1 >> v2;
-			w[v1][v2] = w[v2][v1] = 0;
+			w[v1-1][v2-1] = w[v2-1][v1-1] = 0;
 		}
 		int p[N], d[N], mi, v;
 		bool visit[N], num = false;
 		for (i = 0; i < n; i++)visit[i] = false;
 		for (i = 0; i < n; i++){ d[i] = MAX; p[i] = -1; }
 		d[0] = 0;
-		for (int u = 1; u < n; u++){
+		for (int u = 0; u < n; u++){
 			mi = MAX;
 			for (i = 0; i < n; i++)
 				if (!visit[i] && d[i] < mi){
@@ -46,4 +46,4 @@ int main(){
 		if (!num) printf("No new highways need\n");
 		if (ti)printf("\n");
 	}
-}
+} 
