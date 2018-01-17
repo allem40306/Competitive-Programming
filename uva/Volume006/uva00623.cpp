@@ -1,10 +1,11 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-const int N=1005;
+const int N=2005;
 const int M=3000;
 int dp[N][M];
 
 int main(){
+//    freopen("text.txt","w",stdout);
     dp[0][0]=1;
     for(int i=1;i<N;i++){
         for(int j=0;j<M;j++){
@@ -16,10 +17,9 @@ int main(){
         }
     }
     int n,ai;
-    while(cin>>n){
-        cout<<n<<"!\n";
-        for(ai=M-1;!dp[n][ai];ai--);
-        for(;ai>=0;cout<<dp[n][ai--]);
-        cout<<'\n';
+    for(int n=1;n<=2000;n++){
+//        cout<<n<<"! ";
+        for(ai=0;!dp[n][ai];ai++);
+        cout<<dp[n][ai];
     }
 }

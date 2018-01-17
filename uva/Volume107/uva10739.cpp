@@ -1,33 +1,24 @@
-#include <iostream>
-#include <cstring>
-#include <string>
-#include <cstdio>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
-int dp[1001][1001];
-string a;
+const int N=1005;
+int t,dp[N][N];
 
-int findmin(int i,int j){
-	if (dp[i][j] == -1){
-		if (i >= j)dp[i][j] = 0;
-		else{
-			if (a[i] == a[j]){
-				dp[i][j] = findmin(i + 1, j - 1);
-			}
-			else{
-				dp[i][j] = min(findmin(i + 1, j - 1), min(findmin(i + 1, j), findmin(i, j - 1))) + 1;
-			}
+int main(){
+//	freopen("10739.txt","w",stdout);
+	string s;
+	cin>>t;
+	for(int ti=1;ti<=t;ti++){
+		cin>>s;
+		memset(dp,0,sizeof(dp));
+		for(int j=0;j<s.size();j++){
+			for(int i=j;i>=0;i--){
+				if(s[i]==s[j]){
+					dp[i][j]=dp[i+1][j-1];
+				}else{
+					dp[i][j]=min(dp[i+1][j-1],min(dp[i][j-1],dp[i+1][j]))+1;
+				}
+			}	
 		}
-	}
-	return  dp[i][j];
-}
-
-int main() {
-	int n, t = 1;
-	cin >> n;
-	while (n--){
-		cin >> a;
-		memset(dp, -1, sizeof(dp));
-		printf("Case %d: %d\n", t++, findmin(0, a.size() - 1));
+		cout<<"Case "<<ti<<": "<<dp[0][s.size()-1]<<'\n';
 	}
 }
