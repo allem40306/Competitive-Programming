@@ -1,25 +1,26 @@
-﻿#include <iostream>
-#include <algorithm>
-#include <string>
-#include <sstream>
+#include <bits/stdc++.h>
 using namespace std;
-#define N 2000
 
-int main() {
-	string s, r[N];
-	int rr = 0, n, ni = 0;
-	for (cin >> n>>ws; ni < n;ni++){
-		getline(cin, s);
-		stringstream ss(s);
-		ss >> s;
-		r[rr++] = s;
-	}
-	sort(r, r + rr);
-	for (int t = 1, i = 0; i < rr; i++){
-		if (i!=rr-1&&r[i] == r[i + 1])t++;
-		else{
-			cout << r[i] << ' ' << t << endl;
-			t = 1;
-		}
-	}
+int main(){
+    int n;
+    map<string,int>tb;
+    map<string,int>::iterator it;
+    string s;
+    while(cin>>n){
+        cin>>ws;
+        tb.clear();
+        for(int i=0;i<n;i++){
+            getline(cin,s);
+            stringstream ss(s);
+            ss>>s;
+            if(tb.find(s)==tb.end()){
+                tb[s]=1;
+            }else{
+                tb[s]++;
+            }
+        }
+        for(it=tb.begin();it!=tb.end();it++){
+            cout<<it->first<<' '<<it->second<<'\n';
+        }
+    }
 }
