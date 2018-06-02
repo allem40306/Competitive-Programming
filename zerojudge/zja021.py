@@ -1,4 +1,4 @@
 import sys
 
-for s in sys.stdun:
+for s in sys.stdin:
     print(eval(s.replace("/","//")))
