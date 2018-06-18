@@ -1,6 +1,5 @@
 * auunal_game:一年一度比賽
 * [AtCoder](https://atcoder.jp/)
-* codebook:我的城市模板
 * [Codeforces](http://codeforces.com/)
 * [e-tutor](http://e-tutor.itsa.org.tw/e-Tutor/)
 * otherjudge
