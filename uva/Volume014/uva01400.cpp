@@ -4,7 +4,7 @@ const int N=500005;
 typedef long long LL;
 typedef pair<int,int> PII;
 #define Lc(x) (x<<1)
-#define Rc(x) (x<<1)+1
+#define Rc(x) ((x<<1)+1)
 #define MP make_pair
 //#define debug
 struct Node{
