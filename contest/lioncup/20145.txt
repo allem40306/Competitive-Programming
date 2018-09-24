@@ -1,8 +1,0 @@
-int x1 = int::Parse(textBox1->Text), y1 = int::Parse(textBox2->Text);
-		int x2 = int::Parse(textBox3->Text), y2 = int::Parse(textBox4->Text);
-		int x3 = int::Parse(textBox5->Text), y3 = int::Parse(textBox6->Text);
-		int x4 = int::Parse(textBox7->Text), y4 = int::Parse(textBox8->Text);
-		int dx1 = x2 - y1, dy1 = y2 - y1, dx2 = x4 - x3, dy2 = y4 - y3;
-		if (dx1*dy2 == dy1*dx2)textBox9->Text = "平行\r\n";
-		else if (dx1*dy2 == -1 * dy1*dx2)textBox9->Text = "垂直\r\n";
-		else textBox9->Text = "兩者皆非\r\n";

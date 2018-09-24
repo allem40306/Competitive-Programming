@@ -1,7 +1,0 @@
-int n = int::Parse(textBox1->Text);
-		int ans = 50; n -= 10;
-		if (n>0){ ans += (n > 90 ? 540 : n * 6); n -= 90; }
-		if (n>0){ ans += (n > 100 ? 400 : n * 4); n -= 100; }
-		if (n>0){ ans += (n > 300 ? 900 : n * 3); n -= 300; }
-		if (n>0){ ans += n * 2; }
-		textBox2->Text = ans.ToString();

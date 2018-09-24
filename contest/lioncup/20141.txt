@@ -1,5 +1,0 @@
-int a[20] = { 3, 5 };
-		for (int i = 2; i < 20; i++)
-			a[i] = 3 * a[i - 1] - a[i - 2];
-		int n = int::Parse(textBox1->Text);
-		textBox2->Text = (a[n - 1]).ToString();
