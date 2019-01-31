@@ -20,8 +20,8 @@ struct dinic{
 		for (int i = 0; i <= n; i++)e[i].clear();
 	}
 	void add_edge(int u, int v, int f){
-		e[u].push_back({ v, f, e[v].size() });
-		e[v].push_back({ u, f, e[u].size() - 1 });
+		e[u].push_back({ v, f, (int)e[v].size() });
+		e[v].push_back({ u, f, (int)e[u].size() - 1 });
 	}
 	bool bfs(){
 		fill(level, level + n + 1, -1);
