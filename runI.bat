@@ -7,5 +7,5 @@ g++  -O2 -std=c++11 -Wall %1 -DDBG
  
 if %ERRORLEVEL% EQU 0 (
     echo FINISH COMPILE %1
-    a.exe
+    a.exe < test.in
 )
