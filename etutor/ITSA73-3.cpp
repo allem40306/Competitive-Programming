@@ -20,7 +20,7 @@ int main()
     {
         for(int i = L; i != R; ++i)
         {
-            for(int j = 0 ; j != 60; ++j)
+            for(int j = 0; j != 60; ++j)
             {
                 Test(i, j);
             }
