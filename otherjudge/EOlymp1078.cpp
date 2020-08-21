@@ -28,7 +28,7 @@ int main()
     IOS;
     int t, i;
     string s;
-    while (cin >> s, s != ".")
+    while (cin >> s)
     {
         static int fail[N];
         bulid_fail_funtion(s, fail);

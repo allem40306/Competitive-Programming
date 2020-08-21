@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#define N 1000010
+#define N 2000010
 #define IOS                                                                    \
     cin.tie(NULL);                                                             \
     cout.tie(NULL);                                                            \
