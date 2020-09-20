@@ -2,17 +2,19 @@
 #include <algorithm>
 #include <cmath>
 #include <cstring>
+#include <iomanip>
 #include <iostream>
 #include <map>
 #include <string>
 #include <vector>
+
 using namespace std;
-typedef unsigned long long ULL;
+typedef long long LL;
 const int INF = 1e9;
 const int MXN = 1e5 + 5;
 const int MXV = 3e5 + 5;
-const ULL MOD = 10009;
-const ULL seed = 31;
+const LL MOD = 10009;
+const LL seed = 31;
 #define MP make_pair
 #define PB push_back
 #define F first
@@ -23,36 +25,40 @@ const ULL seed = 31;
     cin.tie(NULL);                                                             \
     cout.tie(NULL);                                                            \
     ios_base::sync_with_stdio(false);
+
+double A, L;
+double x, y;
+double ansx, ansy;
+
+void update()
+{
+    if (abs(x / y - A) < abs(ansx / ansy - A))
+    {
+        ansx = x;
+        ansy = y;
+    }
+}
+
 int main()
 {
-    int n, m, ti = 0;
-    vector<int> order;
-    string s, r;
-    while (cin >> n, n)
+    IOS;
+    while (cin >> A >> L)
     {
-        order.resize(n);
-        char ch;
-        FOR(i, 0, n) { cin >> ch >> order[i]; }
-        cin >> s;
-        cout << "S-Tree #" << ++ti << ":\n";
-        cin >> m;
-        FOR(i, 0, m)
+        ansx = ansy = x = y = 1;
+        update();
+        while (x < L && y < L)
         {
-            cin >> r;
-            int x = 0;
-            FOR(j, 0, n)
+            // cout << x << ' ' << y << '\n';
+            if (x / y > A)
             {
-                if (r[order[j] - 1] == '0')
-                {
-                    x = 2 * x;
-                }
-                else
-                {
-                    x = 2 * x + 1;
-                }
+                y += 1.0;
             }
-            cout << s[x];
+            else
+            {
+                x += 1.0;
+            }
+            update();
         }
-        cout << "\n\n";
+        cout << fixed << setprecision(0) << ansx << ' ' << ansy << '\n';
     }
 }

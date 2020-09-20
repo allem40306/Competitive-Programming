@@ -23,36 +23,50 @@ const ULL seed = 31;
     cin.tie(NULL);                                                             \
     cout.tie(NULL);                                                            \
     ios_base::sync_with_stdio(false);
+
+string s;
+int si;
+int ans1, ans2;
+
+bool hasNext()
+{
+    if (si == (int)s.size())
+    {
+        return false;
+    }
+    ++si;
+    return true;
+}
+
+void dfs(int preD, int postD)
+{
+    int tmp = 0;
+    // cout << preD << ' ' << postD << '\n';
+    ans1 = max(ans1, preD);
+    ans2 = max(ans2, postD);
+    while (hasNext())
+    {
+        if (s[si] == 'd')
+        {
+            ++tmp;
+            dfs(preD + 1, postD + tmp);
+        }
+        else
+        {
+            return;
+        }
+    }
+}
+
 int main()
 {
-    int n, m, ti = 0;
-    vector<int> order;
-    string s, r;
-    while (cin >> n, n)
+    int ti = 0;
+    while (cin >> s, s != "#")
     {
-        order.resize(n);
-        char ch;
-        FOR(i, 0, n) { cin >> ch >> order[i]; }
-        cin >> s;
-        cout << "S-Tree #" << ++ti << ":\n";
-        cin >> m;
-        FOR(i, 0, m)
-        {
-            cin >> r;
-            int x = 0;
-            FOR(j, 0, n)
-            {
-                if (r[order[j] - 1] == '0')
-                {
-                    x = 2 * x;
-                }
-                else
-                {
-                    x = 2 * x + 1;
-                }
-            }
-            cout << s[x];
-        }
-        cout << "\n\n";
+        cout << "Tree " << ++ti << ": ";
+        ans1 = ans2 = 0;
+        si = -1;
+        dfs(0, 0);
+        cout << ans1 << " => " << ans2 << '\n';
     }
 }
