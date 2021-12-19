@@ -5,7 +5,7 @@
             "intelliSenseMode": "clang-x64",
             "compilerPath": "C:/Program Files/LLVM/bin",
             "includePath": [
-                "${workspaceFolder}" 
+                "${workspaceFolder}"
             ],
             "defines": [],
             "browse": {
@@ -16,7 +16,12 @@
                 "databaseFilename": ""
             },
             "cStandard": "c11",
-            "cppStandard": "c++17"
+            "cppStandard": "c++14"
+        },
+        {
+            "name": "Win32",
+            "compilerPath": "C:\\mingw64\\bin\\gcc.exe",
+            "intelliSenseMode": "gcc-x64"
         }
     ],
     "version": 4
