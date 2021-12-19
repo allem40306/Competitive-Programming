@@ -1,13 +1,8 @@
-* auunal_game:一年一度比賽
+# Competitive-Programming
+
+紀錄各大 OJ AC 的 Code，主要包含：
+
 * [AtCoder](https://atcoder.jp/)
 * [Codeforces](http://codeforces.com/)
-* [zerojudge](https://zerojudge.tw/)
-* otherjudge
-    1. [Poj](http://poj.org/)
-    1. [Spoj](http://www.spoj.com/)
-    1. ioicamp
-    1. [topcoder](https://www.topcoder.com/)
-    1. [e-tutor](http://e-tutor.itsa.org.tw/e-Tutor/)
-    1. [sprout](https://neoj.sprout.tw/)
-    1. [tioj](http://tioj.infor.org/)
-    1. [twicpc](http://oj.icpc.tw/)
+* [Online Judge](https://onlinejudge.org/)
+* [Zerojudge](https://zerojudge.tw/)
