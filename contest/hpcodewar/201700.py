@@ -1,1 +1,0 @@
-print ('Hello HP CodeWars 2017 Taipei!');

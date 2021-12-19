@@ -1,113 +1,134 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N=50010;
-const int INF=1e9;
-struct edge{
-	int s,t,w;
-}a[2*N];
-struct edge2{
-	int t,w;
-	edge2(int t,int w):t(t),w(w){}
-	edge2(){};
+const int N = 50010;
+const int INF = 1e9;
+const int LOG = 25;
+
+struct Edge
+{
+    int s, t, w;
+    Edge(){};
+    Edge(int _s, int _t, int _w) : s(_s), t(_t), w(_w) {}
+    bool operator<(const Edge &rhs) const { return w < rhs.w; }
 };
 
-bool cmp(edge a,edge b){
-	return a.w<b.w;
+int n, m, djs[N], depth[N], par[N][LOG], maxcost[N][LOG];
+vector<Edge> edges;
+vector<int> G[N];
+
+int query(int x) { return (x == djs[x] ? x : djs[x] = query(djs[x])); }
+
+void init()
+{
+    memset(par, -1, sizeof(par));
+    memset(maxcost, -1, sizeof(maxcost));
+    edges.clear();
+    for (int i = 0; i < N; i++)
+    {
+        djs[i] = i;
+        G[i].clear();
+    }
 }
 
-int n,m,q,x,y,djs[N],depth[N],par[N][25],maxcost[N][25];
-vector<edge2>v[N];
-int query(int x){return (x==djs[x]?x:djs[x]=query(djs[x]));}
-
-void init(){
-	memset(par,-1,sizeof(par));
-	memset(maxcost,-1,sizeof(maxcost));
-	for(int i=0;i<N;i++){
-		djs[i]=i;
-		v[i].clear();
-	}
+void MST()
+{
+    for (int i = 0; i < m; i++)
+    {
+        int fa = query(edges[i].s), fb = query(edges[i].t);
+        if (fa != fb)
+        {
+            djs[fa] = fb;
+            G[edges[i].s].push_back(i);
+            G[edges[i].t].push_back(i);
+        }
+    }
 }
 
-void MST(){
-	int fa,fb;
-	for(int i=0;i<m;i++){
-		fa=query(a[i].s),fb=query(a[i].t);
-		if(fa!=fb){
-			djs[fa]=fb;
-			v[a[i].s].push_back(edge2(a[i].t,a[i].w));
-			v[a[i].t].push_back(edge2(a[i].s,a[i].w));
-		}
-	}
+void dfs(int s, int f)
+{
+    depth[s] = depth[f] + 1;
+    par[s][0] = f;
+    for (auto i : G[s])
+    {
+        int t = edges[i].s ^ edges[i].t ^ s;
+        if (t != f)
+        {
+            maxcost[t][0] = edges[i].w;
+            dfs(t, s);
+        }
+    }
 }
 
-void dfs(int s,int f,int d){
-	depth[s]=d;
-	par[s][0]=f;
-	for(auto i:v[s]){
-		if(i.t!=f){
-			maxcost[i.t][0]=i.w;
-			dfs(i.t,s,d+1);
-		}
-	}
+void preprocess()
+{
+    for (int i = 1; i <= LOG; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            if (par[j][i - 1] == -1 || par[par[j][i - 1]][i - 1] == -1)
+                continue;
+            par[j][i] = par[par[j][i - 1]][i - 1];
+            maxcost[j][i] =
+                max(maxcost[j][i - 1], maxcost[par[j][i - 1]][i - 1]);
+        }
+    }
 }
 
-void preprocess(){
-	for(int i=1;i<=25;i++){
-		for(int j=1;j<=n;j++){
-			if(par[j][i-1]==-1||par[par[j][i-1]][i-1]==-1)continue;
-			par[j][i]=par[par[j][i-1]][i-1];
-			maxcost[j][i]=max(maxcost[j][i-1],maxcost[par[j][i-1]][i-1]);
-		}
-	}
+int solve(int p, int q)
+{
+    if (depth[p] < depth[q])
+        swap(p, q);
+    int hibit, ans = -INF;
+    for (hibit = 1; (1 << hibit) <= depth[p]; ++hibit)
+        ;
+    for (int i = hibit - 1; i >= 0; i--)
+    {
+        if (depth[p] - (1 << i) >= depth[q])
+        {
+            ans = max(ans, maxcost[p][i]);
+            p = par[p][i];
+        }
+    }
+    if (p == q)
+    {
+        return ans;
+    }
+    for (int i = hibit - 1; i >= 0; i--)
+    {
+        if (par[p][i] == -1 || par[p][i] == par[q][i])
+            continue;
+        ans = max({ans, maxcost[p][i], maxcost[q][i]});
+        p = par[p][i];
+        q = par[q][i];
+    }
+    return max({ans, maxcost[p][0], maxcost[q][0]});
 }
 
-void solve(int p,int q){
-	if(depth[p]<depth[q])swap(p,q);
-//    cout<<p<<'_'<<q<<'\n';
-	int hibit,ans=-INF;
-	for(hibit=1;(1<<hibit)<=depth[p];++hibit);--hibit;
-	for(int i=hibit;i>=0;i--){
-//        cout<<p<<' '<<i<<'\n';
-		if(depth[p]-(1<<i)>=depth[q]){
-			ans=max(ans,maxcost[p][i]);
-			p=par[p][i];
-		}
-//		cout<<p<<' '<<q<<' '<<ans<<'\n';
-	}
-	if(p==q){
-            cout<<ans<<'\n';
-            return;
-	}
-	for(int i=hibit;i>=0;i--){
-        if(par[p][i]==-1||par[p][i]==par[q][i])continue;
-		ans=max(ans,maxcost[p][i]); p=par[p][i];
-		ans=max(ans,maxcost[q][i]); q=par[q][i];
-//		cout<<p<<' '<<q<<' '<<ans<<'\n';
-	}
-	ans=max(ans,maxcost[p][0]);
-	ans=max(ans,maxcost[q][0]);
-	cout<<ans<<'\n';
-}
-
-int main(){
-//    freopen("test.out","w",stdout);
+int main()
+{
     cin.tie(NULL);
-	bool b=0;
-	while(cin>>n>>m){
-		if(b)cout<<'\n'; b=1;
+    for (int ti = 0; cin >> n >> m; ++ti)
+    {
+        if (ti)
+            cout << '\n';
         init();
-		for(int i=0;i<m;i++){
-			cin>>a[i].s>>a[i].t>>a[i].w;
-		}
-		sort(a,a+m,cmp);
-		MST();
-		dfs(1,-1,0);
-//		for(int i=1;i<=n;i++)cout<<par[i][0]<<' ';cout<<'\n';
-		preprocess();
-		cin>>q;
-		for(int i=0;i<q;i++){
-			cin>>x>>y;
-			solve(x,y);
-		}
-	}
+        for (int i = 0; i < m; i++)
+        {
+            int s, t, w;
+            cin >> s >> t >> w;
+            edges.emplace_back(s, t, w);
+        }
+        sort(edges.begin(), edges.end());
+        MST();
+        dfs(1, -1);
+        preprocess();
+        int q;
+        cin >> q;
+        for (int i = 0; i < q; i++)
+        {
+            int x, y;
+            cin >> x >> y;
+            cout << solve(x, y) << '\n';
+        }
+    }
 }

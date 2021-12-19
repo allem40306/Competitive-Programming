@@ -1,34 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N=25;
-//#define debug
-int main(){
-    int t,a[N],ai,x;
-    bitset<N>dp;
+const int N = 25;
+
+int main()
+{
+    int t;
     string s;
-    cin>>t>>ws;
-    while(t--){
-        getline(cin,s);
+    cin >> t >> ws;
+    while (t--)
+    {
+        getline(cin, s);
         stringstream ss(s);
-        ai=0;
-        while(ss>>x){
-            a[ai++]=x;
+        int x;
+        vector<int> a;
+        while (ss >> x)
+        {
+            a.emplace_back(x);
         }
-        int sum=0;
-        dp.reset();
-        for(int i=0;i<ai;i++){
-            sum+=a[i];
-            for(int j=sum;j-a[i]>=0;j--){
-                if(j-a[i]==0||dp[j-a[i]])dp[j]=1;
+        bitset<10000> dp(0);
+        dp[0] = true;
+        int sum = 0;
+        for (auto x : a)
+        {
+            sum += x;
+            for (int i = sum; i - x >= 0; --i)
+            {
+                // cout << i << ' ' << dp[i] << ' '
+                //      << i - x << ' ' << dp[i - x] << '\n';
+                if (dp[i - x] == true)
+                {
+                    dp[i] = true;
+                }
             }
         }
-        #ifdef debug
-            printf("!%d\n",sum);
-        #endif // debug
-        if(sum%2||!dp[sum/2]){
-            cout<<"NO\n";
-        }else{
-            cout<<"YES\n";
+        if (sum % 2 || dp[sum / 2] == false)
+        {
+            cout << "NO\n";
+        }
+        else
+        {
+            cout << "YES\n";
         }
     }
 }
