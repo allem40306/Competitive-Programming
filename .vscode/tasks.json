@@ -6,13 +6,9 @@
       "command": "g++", 
       "args": [
         "${file}",
-        // "-o",
-        // "${fileDirname}/${fileBasenameNoExtension}.exe",
         "-g", 
         "-Wall",
         "-static-libgcc",
-        // "-fcolor-diagnostics",
-        // "--target=x86_64-w64-mingw", 
         "-std=c++11" 
       ], 
       "type": "shell", 
@@ -26,7 +22,6 @@
         "focus": false, 
         "panel": "shared" 
       }
-      // "problemMatcher":"$gcc" 
     }
   ]
 }

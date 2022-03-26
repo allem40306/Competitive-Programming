@@ -1,9 +1,9 @@
 {
     "configurations": [
         {
-            "name": "MinGW",
-            "intelliSenseMode": "clang-x64",
-            "compilerPath": "C:/Program Files/LLVM/bin",
+            "name": "Win32",
+            "intelliSenseMode": "windows-clang-x64",
+            "compilerPath": "C:\\MinGW\\bin\\g++.exe",
             "includePath": [
                 "${workspaceFolder}"
             ],
@@ -16,12 +16,7 @@
                 "databaseFilename": ""
             },
             "cStandard": "c11",
-            "cppStandard": "c++14"
-        },
-        {
-            "name": "Win32",
-            "compilerPath": "C:\\mingw64\\bin\\gcc.exe",
-            "intelliSenseMode": "gcc-x64"
+            "cppStandard": "c++11"
         }
     ],
     "version": 4

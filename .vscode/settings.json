@@ -4,7 +4,7 @@
     "editor.snippetSuggestions": "top",
     "code-runner.runInTerminal": true,
     "code-runner.executorMap": {
-      "c": "cd $dir && clang $fileName -o $fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c11 && $dir$fileNameWithoutExt",
+      "c": "cd $dir && gcc $fileName -Wall -g -Og -static-libgcc -std=c++11 && $dira < test.in > test.out",
       "cpp": "cd $dir && g++ $fileName -Wall -g -Og -static-libgcc -std=c++11 && $dira < test.in > test.out"
     }, 
     "code-runner.saveFileBeforeRun": true, 
@@ -99,5 +99,5 @@
       "typeindex": "cpp",
       "typeinfo": "cpp"
     },
-    "python.pythonPath": "C:\\Users\\USER\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
+    "terminal.integrated.defaultProfile.windows": "Command Prompt"
   }
