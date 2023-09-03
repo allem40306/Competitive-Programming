@@ -1,52 +1,73 @@
-﻿#include <stdio.h> 
-const int MAX_N = 20005;
-const int MOD = 1000;
-//在UVa使用库的abs居然WA，浪费好多时间  
-inline int abs(int a) { return a < 0 ? -a : a; }
+﻿#include <bits/stdc++.h>
+using namespace std;
+using LL = long long;
+using ULL = unsigned long long;
+using PII = pair<int, int>;
+using PLL = pair<LL, LL>;
+using VI = vector<int>;
+using VVI = vector<vector<int>>;
+const int INF = 1e9;
+const int MXN = 0;
+const int MXV = 200000 + 5;
+const double EPS = 1e-9;
+const int MOD = 1e9 + 7;
+#define MP make_pair
+#define PB push_back
+#define F first
+#define S second
+#define FOR(i, L, R) for (int i = L; i < (int)R; ++i)
+#define FORD(i, L, R) for (int i = L; i > (int)R; --i)
+#define IOS                                                                    \
+    cin.tie(nullptr);                                                          \
+    cout.tie(nullptr);                                                         \
+    ios_base::sync_with_stdio(false);
 
-struct Subset{
-	int p, w;
+struct DisjointSet
+{
+    int p[MXV], dis[MXV];
+    void init(int n = MXV - 1)
+    {
+        for (int i = 0; i <= n; i++)
+        {
+            p[i] = i;
+            dis[i] = 0;
+        }
+    }
+    int find(int u)
+    {
+        if (u == p[u])
+            return u;
+        int root = find(p[u]);
+        dis[u] += dis[p[u]];
+        return p[u] = root;
+    }
 };
 
-Subset subs[MAX_N];
-
-int findParent(int x){
-	if (subs[x].p != x)	{
-		int p = subs[x].p;
-		subs[x].p = findParent(subs[x].p);
-		subs[x].w = (subs[x].w + subs[p].w);
-	}
-	return subs[x].p;
-}
-
-void initSubs(int N){
-	for (int i = 1; i <= N; i++){
-		subs[i].p = i;
-		subs[i].w = 0;
-	}
-}
-
-int main(){
-	int T, N, i, j;
-	char cmd;
-	scanf("%d", &T);
-	while (T--){
-		scanf("%d", &N);
-		getchar();
-		initSubs(N);
-		while ((cmd = getchar()) && cmd != 'O'){
-			if (cmd == 'E'){
-				scanf("%d", &i);
-				subs[i].p = findParent(i);
-				printf("%d\n", subs[i].w);
-			}
-			else{
-				scanf("%d %d", &i, &j);
-				subs[i].w = (abs(j - i)) % MOD;
-				subs[i].p = j;//不存在重复连线和更改parent，故此直接连就ok  
-			}
-			getchar();
-		}
-	}
-	return 0;
+int main()
+{
+    int t,n;
+    cin >> t;
+    DisjointSet djs;
+    char ch;
+    int x, y;
+    while (t--)
+    {
+        cin >> n;
+        djs.init(n);
+        while (cin >> ch, ch != 'O')
+        {
+            if (ch == 'E')
+            {
+                cin >>x;
+                djs.find(x);
+                cout << djs.dis[x] << '\n';
+            }
+            else
+            {
+                cin >> x >> y;
+                djs.p[x] = y;
+                djs.dis[x] = abs(x - y) % 1000;
+            }
+        }
+    }
 }

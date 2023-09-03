@@ -136,7 +136,7 @@ int main()
         if (ans == -1)
         {
             cout << "streaming not possible.\n";
-        }
+        } 
         else
         {
             cout << ans << " kbps\n";
