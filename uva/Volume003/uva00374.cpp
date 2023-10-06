@@ -32,6 +32,6 @@ int main()
                 ans = ans * a % c;
             a = a * a % c;
         }
-        cout << ans << '\n';
+        cout << ans % c << '\n';
     }
 }
